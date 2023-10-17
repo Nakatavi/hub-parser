@@ -1,46 +1,51 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { secondsToTimeString, timeStringToSeconds, getGeneralTime } from '../services/timeCounting';
-import CheckBoxSide from "./resultsComponent/checkBoxSide";
-import { getUniqueMembers } from "../services/dataHendler";
+import CheckBoxSide from "./resultsComponent/checkBoxes/checkBoxSide";
+import { getUniqueMembers, getUniqueProjects } from "../services/dataHendler";
 import Graph from "./resultsComponent/graph";
 import "../styles/results.css";
+import ChoosMembers from "./resultsComponent/overview/choosMembers";
+import ModalStart from "./resultsComponent/modals/modalStart";
+import TotalContainer from "./resultsComponent/totals/totalContainer";
 
 
 const Results = ({ data }) => {
-  const [totalTime, setTotalTime] = useState(0);
+  const [members, setMembers] = useState([]);
+  const [project, setProjects] = useState([[],[],[]]);
+  const [graphData, setGraphData] = useState(null);
 
-  const calculateTotalTime = () => {
-    let seconds = 0;
-    if (Array.isArray(data)) {
-      data.forEach((obj) => {
-        seconds += timeStringToSeconds(getGeneralTime(obj));
-      });
+  
+  const hendledMembers = (member) => {
+    if (members.includes(member)) {
+      setMembers(members.filter((m) => m !== member));
+    } else {
+      setMembers([...members, member]);
     }
-    setTotalTime(secondsToTimeString(seconds));
   };
+  const handleGraphData = () =>{
 
-  useEffect(() => {
-    if (data) {
-      calculateTotalTime();
-    }
-    
-  }, [data]);
-
-  let uniqMembers = getUniqueMembers(data);
+  }
 
   return (
     <div className="result">
       <div className="result-checkbox">
-        <CheckBoxSide uniqMembers ={uniqMembers}/>
+        <CheckBoxSide uniqMembers ={getUniqueMembers(data)} hendledMembers={hendledMembers}/>
       </div>
-      <div className="result-graph">
-      <Graph data={data}/>
-      </div>
-      
-      
-      
+      <div className="result-data">
+          <ModalStart data={getUniqueProjects(data)} setProjects={setProjects}/>
+          <div className="total">
+            <div className="members">
+              <ChoosMembers members = {members} handleGraphData ={handleGraphData}/>
+            </div>
+            <div>
+              <TotalContainer data ={data} sets={project} members ={members} setGtaph={setGraphData}/>
+            </div>
+            <div className="result-graph">
+              <Graph data={data}/>
+            </div>
+          </div> 
+      </div>    
     </div>
   );
 };
-
 export default Results;

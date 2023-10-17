@@ -5,7 +5,7 @@
 }
 .result-checkbox{
     display: block;
-    width: auto;
+    min-width: 20%;width: auto;
     height: 600px;
     position: relative;
     margin-left: 25px;
@@ -16,4 +16,11 @@
     display: block;
     width: 40%;
     margin-left: 30px;
+}
+
+.result-data{
+    display: block;
+}
+.total{
+    display: block;
 }

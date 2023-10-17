@@ -19,7 +19,6 @@ const Login = ({ onLogin }) => {
       console.log("ID: " + profile.getId());
       console.log("Name: " + profile.getName());
       console.log("Email: " + profile.getEmail());
-      // You can send the user data to your server or handle it as needed.
     } catch (error) {
       console.error(error);
     }

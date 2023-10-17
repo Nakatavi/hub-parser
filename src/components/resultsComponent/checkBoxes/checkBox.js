@@ -7,7 +7,7 @@ const CheckBox = ({ name, checked, onChange }) => {
           type="checkbox"
           name={name}
           checked={checked}
-          onChange={onChange}
+          onChange={() => onChange(name)}
         />
         {name}
       </div>
