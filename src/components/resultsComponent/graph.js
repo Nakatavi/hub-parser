@@ -13,7 +13,6 @@ const Graph = ( {data} ) => {
         
 
       const ctx = chartRef.current.getContext('2d');
-        console.log(data);
         if (chartRef.current.chart) {
             chartRef.current.chart.destroy();
           }
