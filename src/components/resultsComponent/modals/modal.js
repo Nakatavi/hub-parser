@@ -7,9 +7,6 @@ const Modal = ({ isOpen, onClose, projects }) => {
   const [unbillableProjects, setUnbillableProjects] = React.useState(new Set());
   const [hardProjects, setHardProjects] = React.useState(new Set());
   const [softProjects, setSoftProjects] = React.useState(new Set());
-  // const [unbillableProjects, setUnbillableProjects] = React.useState([]);
-  // const [hardProjects, setHardProjects] = React.useState([]);
-  // const [softProjects, setSoftProjects] = React.useState([]);
   if (!isOpen || !projects || !(projects instanceof Set)) return null;
 
   const toggleUnbillableProject = (project, type) =>{

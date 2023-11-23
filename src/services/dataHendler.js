@@ -76,8 +76,7 @@ export const setSets = (sets, project, type) => {
             }
         }else{
             sets[index].delete(project);
-        }
-        
+        }        
     }
     return sets;
 }
@@ -95,15 +94,14 @@ export const getTotalHours = ({ data, projects, members,vacations }) => {
           vacation: matchingMember.vacation
         };
       });
+      let filterMember = []
       filteredData.forEach(element => {
         let tempTime = getGeneralTime(element)
         seconds += timeStringToSeconds(tempTime);
-        if(element.selectedNumber>0){
+        if((element.vacation > 0 || vacations > 0) && !filterMember.includes(element.Member)){
+            filterMember.push(element.Member)
             seconds+=3600*8*element.vacation;
-        }
-        if(vacations>0){
             seconds+=3600*8*vacations;
-            
         }
       });      
       const totalWorkTime = (seconds/members.length).toFixed(2);
@@ -124,8 +122,6 @@ export const getTotalHours = ({ data, projects, members,vacations }) => {
       const hardToBillRelation = (hardBillTime/(billTotalTime/100)).toFixed(2);
       const softToTotalRelation = (softBillTime/(totalWorkTime/100)).toFixed(2);
       const softToBillRelation = (softBillTime/(billTotalTime/100)).toFixed(2);
-            console.log('billTotalTime');
-            console.log(billTotalTime);
       return (
         {
           totalWorkTime: totalWorkTime && !isNaN(totalWorkTime) ? secondsToTimeString(totalWorkTime) :0, 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { secondsToTimeString, timeStringToSeconds, getGeneralTime } from '../services/timeCounting';
 import CheckBoxSide from "./resultsComponent/checkBoxes/checkBoxSide";
-import { getMemberWithColor, getUniqueMembers, getUniqueProjects, handleData } from "../services/dataHendler";
+import {getUniqueMembers, getUniqueProjects, handleData } from "../services/dataHendler";
 import Graph from "./resultsComponent/graph";
 import "../styles/results.css";
 import ChoosMembers from "./resultsComponent/overview/choosMembers";
@@ -33,11 +32,9 @@ const Results = ({ data }) => {
       }            
     };
   const handleVacations = (vacation) => {
-    setVacations(vacation);
-    
+    setVacations(vacation);    
   };
   const handleGraphData = () =>{
-
   }
   useEffect(()=>{
     setData(handleData(data));

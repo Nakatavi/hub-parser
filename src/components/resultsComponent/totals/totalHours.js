@@ -3,9 +3,8 @@ import {getTotalText} from '../../../enums/timeType';
 import {timeType} from '../../../enums/timeType';
 
 const TotalHours = ({totalWorkTime, totalToWorkRelations, totalToBillRelations, type}) => {
-    const isSpecialCondition = true; // Replace this with your actual condition
+    const totalWorkTimeClassName = `totalWorkTime ${(type == timeType.hardType || type == timeType.softType) ? 'specialStyle' : ''}`;
 
-const totalWorkTimeClassName = `totalWorkTime ${(type == timeType.hardType || type == timeType.softType) ? 'specialStyle' : ''}`;
     return (
         <div className='total-hours'>
             <div className={totalWorkTimeClassName}>{totalWorkTime} h</div>            
