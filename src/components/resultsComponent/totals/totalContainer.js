@@ -7,12 +7,10 @@ import {timeType} from '../../../enums/timeType';
 const TotalContainer = ({data, projects,members,vacations}) => {
     
     const [totalHours,setTotalHours] = useState(null);
-    console.log(totalHours);
     useEffect(() => {
       let hoursData = getTotalHours({ data,projects, members, vacations });
           setTotalHours(hoursData);
-          console.log(hoursData);
-  }, [data, members, vacations]);
+    }, [data, members, vacations]);
     
     return (
       <div className="total-container">       
