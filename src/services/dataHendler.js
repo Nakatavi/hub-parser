@@ -38,8 +38,6 @@ export const handleData = (data) => {
   if(data.length>1){
     data.pop()
   }
-  
-  console.log('finish data : '+data);
   return data;
 };
 
@@ -86,10 +84,6 @@ export const setSets = (sets, project, type) => {
 
 export const getTotalHours = ({ data, projects, members,vacations }) => {
     let seconds = 0;   
-    const billableProjects = projects[1];
-    console.log('members'); 
-    console.log(members); 
-    
     const filteredData = data.filter(dataItem => {
         const matchingMember = members.find(memberItem => memberItem.Member === dataItem.Member);
         return matchingMember;
@@ -101,8 +95,6 @@ export const getTotalHours = ({ data, projects, members,vacations }) => {
           vacation: matchingMember.vacation
         };
       });
-      console.log('filteredData');
-      console.log(filteredData);
       filteredData.forEach(element => {
         let tempTime = getGeneralTime(element)
         seconds += timeStringToSeconds(tempTime);
@@ -111,25 +103,44 @@ export const getTotalHours = ({ data, projects, members,vacations }) => {
         }
         if(vacations>0){
             seconds+=3600*8*vacations;
+            
         }
       });      
-      // const billaleData = filteredData.filter(f => )
+      const totalWorkTime = (seconds/members.length).toFixed(2);
       const workTime = countMonthTime(filteredData[0])
-      let totalTime = ((seconds/members.length)/(workTime/100)).toFixed(2);
-      const billableData = filteredData.filter(b => [...projects[1]].includes(b.Project));
-      const unBillableData = filteredData.filter(b => [...projects[2]].includes(b.Project));
-      console.log('billableData');
-      console.log(billableData);
-      console.log('unBillableData');
-      console.log(unBillableData);
-      console.log('total');
-      console.log(totalTime);
-      console.log('seconds');
-      console.log(secondsToTimeString(seconds));
-      console.log('projects');
-      console.log(projects);
+      const totalToWorkRelations = ((totalWorkTime)/(workTime/100)).toFixed(2);
+      const arrProjects = Array.from(projects, currentSet  => [...currentSet ]);
+      const unbillableData = filteredData.filter(b => arrProjects[0].includes(b.Project));
+      const billableData = filteredData.filter(b => arrProjects[1].includes(b.Project));
+      const unBillableData = filteredData.filter(b => arrProjects[2].includes(b.Project));
 
-
+      const unbillTotalTime = Math.floor(getTotalTime(unbillableData)/members.length);
+      const unbillToTotalRelation = (unbillTotalTime/(totalWorkTime/100)).toFixed(2);
+      const hardBillTime = +(getTotalTime(billableData)/members.length).toFixed(2);
+      const softBillTime = +(getTotalTime(unBillableData)/members.length).toFixed(2);
+      const billTotalTime = (hardBillTime + softBillTime);
+      const billToToalRelations = (billTotalTime/(totalWorkTime/100)).toFixed(2);
+      const hardToTotalRelation = (hardBillTime/(totalWorkTime/100)).toFixed(2);
+      const hardToBillRelation = (hardBillTime/(billTotalTime/100)).toFixed(2);
+      const softToTotalRelation = (softBillTime/(totalWorkTime/100)).toFixed(2);
+      const softToBillRelation = (softBillTime/(billTotalTime/100)).toFixed(2);
+            console.log('billTotalTime');
+            console.log(billTotalTime);
+      return (
+        {
+          totalWorkTime: totalWorkTime && !isNaN(totalWorkTime) ? secondsToTimeString(totalWorkTime) :0, 
+          totalToWorkRelations: totalToWorkRelations, 
+          unbillTotalTime: unbillTotalTime && !isNaN(unbillTotalTime) ? secondsToTimeString(unbillTotalTime) :0, 
+          unbillToTotalRelation: unbillToTotalRelation, 
+          billTotalTime: billTotalTime && !isNaN(billTotalTime) ? secondsToTimeString(billTotalTime) :0,
+          billToToalRelations: billToToalRelations,
+          hardBillTime: hardBillTime && !isNaN(hardBillTime) ? secondsToTimeString(hardBillTime) :0,
+          hardToTotalRelation: hardToTotalRelation,
+          hardToBillRelation: hardToBillRelation,
+          softBillTime: softBillTime && !isNaN(softBillTime) ? secondsToTimeString(softBillTime) :0,
+          softToTotalRelation: softToTotalRelation,
+          softToBillRelation: softToBillRelation
+        });
   }; 
 
 const countMonthTime = (element) => {

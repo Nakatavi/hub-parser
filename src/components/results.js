@@ -32,7 +32,6 @@ const Results = ({ data }) => {
         setMembers([...members,member]);
       }            
     };
-    console.log(members);
   const handleVacations = (vacation) => {
     setVacations(vacation);
     
@@ -42,7 +41,6 @@ const Results = ({ data }) => {
   }
   useEffect(()=>{
     setData(handleData(data));
-    console.log(data);
   },[data]);
 
   return (
