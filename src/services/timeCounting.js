@@ -15,11 +15,11 @@ export const secondsToTimeString = (totalSeconds) => {
 }
 
 export const getGeneralTime = (obj)=>{
-    let x =null
+    let time =null
      Object.keys(obj).map((key) => {
       if(key === 'Time'){
-        x=obj[key];
+        time=obj[key];
       }        
     })
-    return x;
+    return time;
 };
