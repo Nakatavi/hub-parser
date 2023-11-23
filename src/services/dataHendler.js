@@ -94,16 +94,20 @@ export const getTotalHours = ({ data, projects, members,vacations }) => {
           vacation: matchingMember.vacation
         };
       });
-      let filterMember = []
+      let filterMemberVactions = [];
+      let filterGlobalVactions = [];
       filteredData.forEach(element => {
         let tempTime = getGeneralTime(element)
         seconds += timeStringToSeconds(tempTime);
-        if((element.vacation > 0 || vacations > 0) && !filterMember.includes(element.Member)){
-            filterMember.push(element.Member)
+        if((element.vacation > 0) && !filterMemberVactions.includes(element.Member)){
+          filterMemberVactions.push(element.Member)
             seconds+=3600*8*element.vacation;
+        }
+        if((vacations > 0) && !filterGlobalVactions.includes(element.Member)){
+          filterGlobalVactions.push(element.Member)
             seconds+=3600*8*vacations;
         }
-      });      
+      });     
       const totalWorkTime = (seconds/members.length).toFixed(2);
       const workTime = countMonthTime(filteredData[0])
       const totalToWorkRelations = ((totalWorkTime)/(workTime/100)).toFixed(2);
