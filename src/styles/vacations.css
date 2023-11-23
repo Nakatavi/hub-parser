@@ -1,0 +1,8 @@
+.vacations {
+    display: flex;
+    align-items: center; /* Вирівнює елементи вертикально */
+}
+
+.vacations select {
+    margin-left: 10px; /* Додатковий відступ відліво для вибірника */
+}

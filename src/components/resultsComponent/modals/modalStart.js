@@ -7,12 +7,12 @@ const ModalStart = ({data, setProjects}) => {
   
     const toggleModal = (arr) => {
       setIsModalOpen(!isModalOpen);
-      console.log(arr);
       setProjects(arr);
     };
   
     return (
       <div>
+        
         <button onClick={toggleModal}>Select Project status</button>
         <Modal isOpen={isModalOpen} onClose={toggleModal} projects = {data}/>
       </div>

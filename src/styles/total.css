@@ -1,3 +1,64 @@
-.total-container{
+.total-container {
     display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: 30px;
+    font-family: sans-serif;
 }
+
+
+.total-hours{
+    width: 240px;
+    padding: 10px;
+    margin: 0 10px;
+    display: block;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: white;
+    height: 119px;
+}
+.bilable-container{
+    display: flex;
+    width: auto;
+    background-color: white;
+}
+
+.internal-total{
+    width: auto;
+}
+.total-text{
+    display: flex;
+    flex-direction: row;
+    font-weight: 500;
+    font-size: 14px;
+    color: #8B8B8B;
+}
+.totalWorkTime{
+    font-weight: 700;
+    font-size: 32px;
+    color: #051926;
+}
+.getTotalText{
+    font-weight: 500;
+    font-size: 14px;
+    color: #8B8B8B;
+    margin-top: 10px;
+}
+.total-text span{
+    color: #051926;
+}
+.total-text div{
+    margin: 5px 0;
+}
+.specialStyle{
+    font-weight: 700;
+    font-size: 24px;
+    color: #051926;
+    margin-top: 7px;
+}
+.line {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+  }

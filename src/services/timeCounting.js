@@ -10,16 +10,16 @@ export const timeStringToSeconds = (timeString) => {
 export const secondsToTimeString = (totalSeconds) => {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
+    const seconds = Math.floor(totalSeconds % 60);
     return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
 export const getGeneralTime = (obj)=>{
-    let x =null
+    let time =null
      Object.keys(obj).map((key) => {
       if(key === 'Time'){
-        x=obj[key];
+        time=obj[key];
       }        
     })
-    return x;
+    return time;
 };

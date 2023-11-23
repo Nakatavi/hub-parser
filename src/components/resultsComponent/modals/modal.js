@@ -7,6 +7,9 @@ const Modal = ({ isOpen, onClose, projects }) => {
   const [unbillableProjects, setUnbillableProjects] = React.useState(new Set());
   const [hardProjects, setHardProjects] = React.useState(new Set());
   const [softProjects, setSoftProjects] = React.useState(new Set());
+  // const [unbillableProjects, setUnbillableProjects] = React.useState([]);
+  // const [hardProjects, setHardProjects] = React.useState([]);
+  // const [softProjects, setSoftProjects] = React.useState([]);
   if (!isOpen || !projects || !(projects instanceof Set)) return null;
 
   const toggleUnbillableProject = (project, type) =>{
@@ -21,8 +24,10 @@ const Modal = ({ isOpen, onClose, projects }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
+      <h1>Project Statuses</h1>
         <div className="columnsTable">
           <div>
+            <h3>Unbillable</h3>
             {Array.from(projects).map((project, index) => (
               <div key={index}>
                 <input
@@ -35,6 +40,7 @@ const Modal = ({ isOpen, onClose, projects }) => {
             ))}
           </div>
           <div>
+          <h3>Hard</h3>
             {Array.from(projects).map((project, index) => (
               <div key={index}>
                 <input
@@ -47,6 +53,7 @@ const Modal = ({ isOpen, onClose, projects }) => {
             ))}
           </div>
           <div>
+          <h3>Soft</h3>
             {Array.from(projects).map((project, index) => (
               <div key={index}>
                 <input
