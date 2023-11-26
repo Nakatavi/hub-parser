@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import "../../../styles/checkbox.css";
 
 const CheckBox = ({ name,  checked, onChange }) => {
   
@@ -15,13 +16,15 @@ const CheckBox = ({ name,  checked, onChange }) => {
     onChange({ ...nameState, isChecked: checked });
   };
     return (
-      <div>        
+      <div className='checkBoxItem' >  
+      <div>      
         <input
           type="checkbox"
           name={nameState.Member}
           onChange={handleCheckboxChange}
         />
         {nameState.Member}
+      </div>
         <select  value={vacation} onChange={handleNumberChange}>
         {[...Array(26).keys()].map(number => (
           <option key={number} value={number}>

@@ -1,4 +1,5 @@
 import CheckBox from './checkBox';
+import "../../../styles/checkbox.css";
 
 const CheckBoxSide = ( {uniqMembers,hendledMembers} ) => {
     return (

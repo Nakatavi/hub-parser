@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Header from '../components/header/header';
 import CheckBoxSide from "./resultsComponent/checkBoxes/checkBoxSide";
 import {getUniqueMembers, getUniqueProjects, handleData } from "../services/dataHendler";
 import Graph from "./resultsComponent/graph";
@@ -7,15 +8,17 @@ import ChoosMembers from "./resultsComponent/overview/choosMembers";
 import ModalStart from "./resultsComponent/modals/modalStart";
 import TotalContainer from "./resultsComponent/totals/totalContainer";
 import Vacations from "./resultsComponent/vacations/vacations";
+import { useNavigate } from "react-router-dom";
 
 
 const Results = ({ data }) => {
+  const navigate = useNavigate();
   const [members, setMembers] = useState([]);
   const [project, setProjects] = useState([[],[],[]]);
   const [graphData, setGraphData] = useState(null);
   const [dataState,setData] = useState(data);
   const [vacations, setVacations] = useState(0);
-
+const handleBack = () => navigate('/');
   
   const hendledMembers = (member) => {
       const existingMember = members.find(m => (m.Member === member.Member))
@@ -41,27 +44,30 @@ const Results = ({ data }) => {
   },[data]);
 
   return (
-    <div className="result">
-      <div className="result-checkbox">
-        <CheckBoxSide uniqMembers ={getUniqueMembers(data)} hendledMembers={hendledMembers}/>
-      </div>
-      <div className="result-data">
-        <div className="cooseSector">
-          <Vacations handleVacations ={handleVacations}/>
-          <ModalStart data={getUniqueProjects(dataState)} setProjects={setProjects}/>
+    <>
+    <Header onBackButtonClick={handleBack} />
+      <div className="result">
+        <div className="result-checkbox">
+          <CheckBoxSide uniqMembers ={getUniqueMembers(data)} hendledMembers={hendledMembers}/>
         </div>
-          
-          <div className="total">
-            <div className="members">
-              <ChoosMembers members = {members} handleGraphData ={handleGraphData}/>
-            </div>
-              <TotalContainer data ={dataState} projects={project} members ={members} vacations = {vacations} setGraph={setGraphData}/>
-            <div className="result-graph">
-              <Graph data={data}/>
-            </div>
-          </div> 
-      </div>    
-    </div>
+        <div className="result-data">
+          <div className="cooseSector">
+            <Vacations handleVacations ={handleVacations}/>
+            <ModalStart data={getUniqueProjects(dataState)} setProjects={setProjects}/>
+          </div>
+            
+            <div className="total">
+              <div className="members">
+                <ChoosMembers members = {members} handleGraphData ={handleGraphData}/>
+              </div>
+                <TotalContainer data ={dataState} projects={project} members ={members} vacations = {vacations} setGraph={setGraphData}/>
+              <div className="result-graph">
+                <Graph data={data}/>
+              </div>
+            </div> 
+        </div>    
+      </div>
+    </>
   );
 };
 export default Results;
