@@ -1,23 +1,18 @@
-// 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './App.css';
 import {RouterProvider } from 'react-router-dom';
 import { routing } from './services/routing';
-import Header from './components/header/header';
 
+import Login from './components/header/login'
 const App = () => {
-
-  const [currentRoute, setCurrentRoute] = useState('/');
-  const handleBackButtonClick = () => {
-    console.log('Home');
-    setCurrentRoute('/'); 
-    };
+  
   return(
     <>
-      <Header element={<Header onBackButtonClick={handleBackButtonClick} />} />
-      <RouterProvider router={routing} />
+        <RouterProvider router={routing} />
+      
     </>
   );
 } 
 
 export default App;
+
