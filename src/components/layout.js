@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../styles/layout.css";
 import Papa from "papaparse";
 import { useNavigate } from "react-router-dom";
 
 const Layout = ({ loadData }) => {
   const navigate = useNavigate();
-  
+  console.log('Username Layout :',loadData);
   const parseCsvFile = (file) => {
     return new Promise((resolve, reject) => {
       Papa.parse(file, {

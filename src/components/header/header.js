@@ -1,13 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../styles/header.css";
-import Login from "./login";
-import { useNavigate } from "react-router-dom";
 
 const Header = ({ onBackButtonClick }) => {
-    // const navigate = useNavigate();
-    const handleCLickBeck = () => {
-        onBackButtonClick();
-    }
   return (
     <div className="header">
       <div className="left-block">
@@ -20,7 +14,6 @@ const Header = ({ onBackButtonClick }) => {
         </button>
       </div>
       <div className="right-block">
-        <Login/>
       </div>
     </div>
   );

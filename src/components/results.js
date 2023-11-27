@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from '../components/header/header';
 import CheckBoxSide from "./resultsComponent/checkBoxes/checkBoxSide";
-import {getUniqueMembers, getUniqueProjects, handleData } from "../services/dataHendler";
+import { getUniqueMembers, getUniqueProjects, handleData } from "../services/dataHendler";
 import Graph from "./resultsComponent/graph";
 import "../styles/results.css";
 import ChoosMembers from "./resultsComponent/overview/choosMembers";
@@ -9,16 +9,32 @@ import ModalStart from "./resultsComponent/modals/modalStart";
 import TotalContainer from "./resultsComponent/totals/totalContainer";
 import Vacations from "./resultsComponent/vacations/vacations";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from '../components/AuthContext';
 
 const Results = ({ data }) => {
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [members, setMembers] = useState([]);
   const [project, setProjects] = useState([[],[],[]]);
   const [graphData, setGraphData] = useState(null);
   const [dataState,setData] = useState(data);
   const [vacations, setVacations] = useState(0);
-const handleBack = () => navigate('/');
+  
+  useEffect(() => {
+    console.log("Checking authentication status");
+    if (!isAuthenticated) {
+      console.log("Not authenticated, redirecting to login");
+      navigate('/login');
+    }
+  }, [isAuthenticated, navigate]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setData(handleData(data));
+    }
+  }, [isAuthenticated, data]);
+
+  const handleBack = () => navigate('/');
   
   const hendledMembers = (member) => {
       const existingMember = members.find(m => (m.Member === member.Member))
@@ -37,15 +53,12 @@ const handleBack = () => navigate('/');
   const handleVacations = (vacation) => {
     setVacations(vacation);    
   };
-  const handleGraphData = () =>{
-  }
-  useEffect(()=>{
-    setData(handleData(data));
-  },[data]);
-
+  const handleGraphData = () => {
+  };
   return (
-    <>
-    <Header onBackButtonClick={handleBack} />
+    isAuthenticated && (
+    <div>
+      <Header onBackButtonClick={handleBack} />
       <div className="result">
         <div className="result-checkbox">
           <CheckBoxSide uniqMembers ={getUniqueMembers(data)} hendledMembers={hendledMembers}/>
@@ -67,7 +80,9 @@ const handleBack = () => navigate('/');
             </div> 
         </div>    
       </div>
-    </>
+    </div>
+    )
   );
 };
+
 export default Results;
