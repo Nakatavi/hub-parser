@@ -73,9 +73,9 @@ const Results = ({ data }) => {
               <div className="members">
                 <ChoosMembers members = {members} handleGraphData ={handleGraphData}/>
               </div>
-                <TotalContainer data ={dataState} projects={project} members ={members} vacations = {vacations} setGraph={setGraphData}/>
+                <TotalContainer data ={dataState} projects={project} members ={members} vacations = {vacations}/>
               <div className="result-graph">
-                <Graph data={data}/>
+                <Graph data={dataState} members ={members}/>
               </div>
             </div> 
         </div>    

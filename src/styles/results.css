@@ -9,8 +9,9 @@
     display: block;
     min-width: 20%;
     width: auto;
-    height: 600px;
+    height: auto;
     position: relative;
+    margin-top: 15px;
     margin-left: 25px;
     border: 1px solid rgb(65, 61, 61);
     overflow: scroll;
