@@ -17,11 +17,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run generate && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -40,12 +38,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "https://Nakatavi.github.io/hub-parser",
-  "build": {
-    "sourceDirectory": "src"
-  },
-  "devDependencies": {
-    "gh-pages": "^6.1.0"
   }
 }
