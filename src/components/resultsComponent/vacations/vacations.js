@@ -10,7 +10,7 @@ const Vacations = ({handleVacations}) => {
     }
     return (
         <div className='vacations'>
-            <h2>Vacations</h2>
+            <h2>Apiko Softwate OU</h2>
             <select  value={vacations} onChange={handleNumberChange}>
         {[...Array(26).keys()].map(number => (
           <option key={number} value={number}>

@@ -5,7 +5,9 @@ import { BarController, CategoryScale, LinearScale, BarElement } from 'chart.js'
 Chart.register(BarController, CategoryScale, LinearScale, BarElement);
 
 
-const Graph = ( {data} ) => {
+const Graph = ( {data, members} ) => {
+  console.log(data);
+  console.log(members);
   const chartRef = useRef(null);
 //   console.log(data.length);
   useEffect(() => {
